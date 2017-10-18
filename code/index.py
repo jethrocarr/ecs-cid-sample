@@ -110,6 +110,8 @@ def checkContainerInstanceTaskStatus(Ec2InstanceId):
 
 def lambda_handler(event, context):
 
+    logger.info("Lambda received the event %s",event)
+
     line = event['Records'][0]['Sns']['Message']
     message = json.loads(line)
     Ec2InstanceId = message['EC2InstanceId']
@@ -122,7 +124,6 @@ def lambda_handler(event, context):
     tmpMsgAppend = None
     completeHook = 0
 
-    logger.info("Lambda received the event %s",event)
     logger.debug("records: %s",event['Records'][0])
     logger.debug("sns: %s",event['Records'][0]['Sns'])
     logger.debug("Message: %s",message)
